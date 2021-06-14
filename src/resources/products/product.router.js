@@ -7,7 +7,7 @@ const router = Router();
 // /api/list
 router
   .route('/')
-  .get(controllers.getMany)
+  .get(controllers.getAllMany)
   //.get(controllers.getOne)
   .post(controllers.createOne)
 
@@ -15,7 +15,7 @@ router
 // /api/list/:id
 router
   .route('/:id')
-  .get(controllers.getOne)
+  .get(controllers.getOneProductWithCategory)
   .put(controllers.updateOne)
   .delete(controllers.removeOne)
 

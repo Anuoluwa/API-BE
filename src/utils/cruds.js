@@ -84,10 +84,47 @@ export const removeOne = model => async (req, res) => {
   }
 }
 
+export const getOneProductWithCategory = model => async (req, res) => {
+  try {
+    const doc = await model
+      .findOne({ createdBy: req.user._id, _id: req.params.id })
+      .populate("category", "-_id -createdBy -createdAt -updatedAt -__v")
+      .lean()
+      .exec()
+      console.log(doc, 'll')
+    if (!doc) {
+      return res.status(400).end()
+    }
+
+    res.status(200).json({ data: doc })
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
+
+export const getAllMany  = model => async (req, res) => {
+  try {
+    const docs = await model
+    .find()
+    .populate("category", "-_id -createdBy -createdAt -updatedAt -__v")
+    .populate("user", "-_id")
+      .lean()
+      .exec()
+
+    res.status(200).json({ data: docs })
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
+
 export const crudControllers = model => ({
   removeOne: removeOne(model),
   updateOne: updateOne(model),
   getMany: getMany(model),
   getOne: getOne(model),
-  createOne: createOne(model)
+  createOne: createOne(model),
+  getAllMany: getAllMany (model),
+  getOneProductWithCategory: getOneProductWithCategory (model)
 })
