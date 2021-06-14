@@ -38,6 +38,10 @@ const productSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "category"
       },
+      supplier: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "supplier"
+      },
       createdBy: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'user',

@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 mongoose.set('useCreateIndex', true);
 
-const productSchema = new mongoose.Schema(
+const supplierSchema = new mongoose.Schema(
     {
       supplierName: {
         type: String,
@@ -42,7 +42,7 @@ const productSchema = new mongoose.Schema(
       supplierRep: [
         {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "User"
+          ref: "user"
         }
       ],
       createdBy: {
@@ -55,4 +55,4 @@ const productSchema = new mongoose.Schema(
     { timestamps: true }
   );
 
-  export const Product = mongoose.model('product', productSchema);
+  export const Supplier = mongoose.model('supplier', supplierSchema);

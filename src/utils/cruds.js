@@ -108,7 +108,7 @@ export const getAllMany  = model => async (req, res) => {
     const docs = await model
     .find()
     .populate("category", "-_id -createdBy -createdAt -updatedAt -__v")
-    .populate("user", "-_id")
+    .populate("supplier", "supplierName -_id")
       .lean()
       .exec()
 
