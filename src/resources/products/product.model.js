@@ -7,25 +7,25 @@ const productSchema = new mongoose.Schema(
       productName: {
         type: String,
         lowercase: true,
-        required: [true, 'category field is required'],
+        required: [true, 'Category  is required'],
         trim: true
       },
       composition: {
         type: String,
         lowercase: true,
-        required: [true, 'category field is required'],
+        required: [true, 'composition is required'],
         trim: true
       },
       approvedProductNo: {
         type: String,
         lowercase: true,
-        required: [true, 'category field is required'],
+        required: [true, 'Approved Number is required'],
         trim: true
       },
       expirationDate: {
         type: Date,
         lowercase: true,
-        required: [true, 'date field is required'],
+        required: [true, 'Date  is required'],
         trim: true,
         min: '2021-01-28'
       },
