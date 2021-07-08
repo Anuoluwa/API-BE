@@ -145,7 +145,7 @@ export const checkExistingValues = async (req, res, next) => {
     return failure(422, `name: ${name} already exists`, res);
   }
   if (result.length > 0 && inputEmail !== undefined && [inputEmail].length > 0) {
-    return failure(422, `email: ${email} already exists`, res);
+    return failure(400, `email: ${email} already exists`, res);
   }
   if (result.length > 0 && inputBvn !== undefined && [inputBvn].length > 0) {
     return failure(422, `BVN: ${bvn} already exists`, res);
