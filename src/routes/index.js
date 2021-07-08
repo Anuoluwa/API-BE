@@ -10,7 +10,6 @@ import supplierRouter from '../resources/suppliers/supplier.router';
 export const app = express();
 const router = Router();
 
-
 router.use('/users', userRouter);
 router.use('/auth', authRouter);
 router.use('/categories', categoryRouter);

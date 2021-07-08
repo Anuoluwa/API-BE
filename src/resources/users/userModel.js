@@ -13,33 +13,38 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       lowercase: true,
-      required: [true, 'email field is required'],
-      trim: true
+      required: [true, 'Email is required'],
+      trim: true,
+      min: [3, 'Email minimum length is three'],
+      max: [50, 'Email  maximum length is fifty']
     },
     firstName: {
       type: String,
-      required: [true, 'name field is required'],
-      trim: true
-      // min: [3, 'minimum length is three'],
-      // max: [50, 'maximum length is fifty']
+      required: [true, 'Firstname is required'],
+      trim: true,
+      min: [1, 'Firstname cannot be empty'],
+      max: [50, 'Firstname maximum length must be fifty']
     },
     lastName: {
       type: String,
-      required: [true, 'name field is required'],
-      trim: true
-      // min: [3, 'minimum length is three'],
-      // max: [50, 'maximum length is fifty']
+      required: [true, 'Lastname is required'],
+      trim: true,
+      min: [1, 'Lastname cannot be empty'],
+      max: [50, 'Lastname maximum length must be  fifty']
     },
     password: {
       type: String,
-      required: [true, 'password is required']
-      // minlength: [8, 'password must be at least eight characters'],
-      // maxlength: [12, 'password must not be more than twelve characters']
+      required: [true, 'Password is required'],
+      minlength: [8, 'Password must be at least eight characters'],
+      maxlength: [16, 'Password must not be more than sixteen characters']
     },
     mobile: {
       type: String,
       required: true,
       trim: true,
+      required: [true, 'Password is required'],
+      minlength: [8, 'Password must be at least eight characters'],
+      maxlength: [16, 'Password must not be more than sixteen characters']
     },
     role: {
       type: String,

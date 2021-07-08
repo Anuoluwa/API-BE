@@ -18,13 +18,13 @@ export const verifyToken = token =>
 
 export const signup = async (req, res) => {
   if (!req.body.email || !req.body.password) {
-    return res.status(400).send({ message: 'need email and password' })
+    return res.status(400).send({ status: 'fail', message: 'Need email and password' })
   }
 
   try {
     const user = await User.create(req.body)
     const token = newToken(user)
-    return res.status(201).send({ token })
+    return res.status(201).send({ status: 'success', token })
   } catch (e) {
     return res.status(500).end()
   }
@@ -32,10 +32,10 @@ export const signup = async (req, res) => {
 
 export const signin = async (req, res) => {
   if (!req.body.email || !req.body.password) {
-    return res.status(400).send({ message: 'Need email and password' })
+    return res.status(400).send({ status: 'fail', message: 'Need email and password' })
   }
 
-  const invalid = { message: 'Invalid email or password' }
+  const invalid = { status: 'fail', message: 'Invalid email or password' }
 
   try {
     const user = await User.findOne({ email: req.body.email })
@@ -43,17 +43,17 @@ export const signin = async (req, res) => {
       .exec()
 
     if (!user) {
-      return res.status(401).send(invalid)
+      return res.status(401).json({status: 'fail', message: 'Invalid credentails'})
     }
 
     const match = await user.checkPassword(req.body.password)
 
     if (!match) {
-      return res.status(401).send(invalid)
+      return res.status(401).json({status: 'fail', message: 'Invalid credentails'})
     }
 
     const token = newToken(user)
-    return res.status(201).send({ token })
+    return res.status(201).send({ status: 'success', token })
   } catch (e) {
     console.error(e)
     res.status(500).end()

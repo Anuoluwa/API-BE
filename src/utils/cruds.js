@@ -119,6 +119,33 @@ export const getAllMany  = model => async (req, res) => {
   }
 }
 
+export const getManyWithoutId  = model => async (req, res) => {
+  try {
+    const docs = await model
+    .find()
+    .select("-createdBy -createdAt -updatedAt -__v")
+      .lean()
+      .exec()
+
+    res.status(200).json({ data: docs })
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
+
+// export const getEachCategoryWithItsProducts =  (model , categoryId)=> async(req, res) => {
+//   try {
+//     const products = await model.find({ category: categoryId })
+//     .populate("category", "-_id -createdBy -createdAt -updatedAt -__v")
+//     .lean().exec
+//   } catch (e) {
+//     console.error(e)
+//     res.status(400).end()
+//   }
+
+// }
+
 export const crudControllers = model => ({
   removeOne: removeOne(model),
   updateOne: updateOne(model),
@@ -126,5 +153,6 @@ export const crudControllers = model => ({
   getOne: getOne(model),
   createOne: createOne(model),
   getAllMany: getAllMany (model),
-  getOneProductWithCategory: getOneProductWithCategory (model)
+  getOneProductWithCategory: getOneProductWithCategory (model),
+  getManyWithoutId: getManyWithoutId(model)
 })

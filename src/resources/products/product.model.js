@@ -42,6 +42,10 @@ const productSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "supplier"
       },
+      productPhotoURL: {
+        type: String,
+        trim: true
+      },
       createdBy: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'user',

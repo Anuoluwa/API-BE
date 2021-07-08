@@ -16,6 +16,8 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { signup, signin, protect } from './utils/auth'
 import tryCatch from './helpers/tryCatch';
+import productController from './resources/products/product.controller';
+import categoryController from './resources/categories/category.controller'
 
 export const app = express();
 
@@ -41,8 +43,10 @@ app.get('/api-docs.json', (req, res) => {
   res.send(swaggerSpec);
 });
 
-app.post('/signup', tryCatch(signup));
-app.post('/signin', tryCatch(signin));
+app.post('/api/v1/auth/signup', tryCatch(signup));
+app.post('/api/v1/auth/login', tryCatch(signin));
+app.get('/api/v1/products/all',  productController.getAllMany)
+app.get('/api/v1/categories',  categoryController.getManyWithoutId)
 // search
 app.use('/api', protect);
 app.use('/api/v1', router);
@@ -51,7 +55,7 @@ app.use('/api/v1', router);
 app.use('*', (req, res) =>
   res.status(404).json({
     status: 404,
-    message: 'No endpoint matches that URL'
+    message: 'URL does not exist'
   })
 );
 
