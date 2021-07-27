@@ -134,6 +134,22 @@ export const getManyWithoutId  = model => async (req, res) => {
   }
 }
 
+export const getAllManyByUserId  = model => async (req, res) => {
+  try {
+    const docs = await model
+    .find({ createdBy: req.user._id })
+    .populate("category", "-_id -createdBy -createdAt -updatedAt -__v")
+    .populate("supplier", "supplierName -_id")
+      .lean()
+      .exec()
+
+    res.status(200).json({ data: docs })
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
+
 // export const getEachCategoryWithItsProducts =  (model , categoryId)=> async(req, res) => {
 //   try {
 //     const products = await model.find({ category: categoryId })
@@ -154,5 +170,6 @@ export const crudControllers = model => ({
   createOne: createOne(model),
   getAllMany: getAllMany (model),
   getOneProductWithCategory: getOneProductWithCategory (model),
-  getManyWithoutId: getManyWithoutId(model)
+  getManyWithoutId: getManyWithoutId(model),
+  getAllManyByUserId :getAllManyByUserId(model) 
 })

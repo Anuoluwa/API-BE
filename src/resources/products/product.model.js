@@ -10,6 +10,12 @@ const productSchema = new mongoose.Schema(
         required: [true, 'Category  is required'],
         trim: true
       },
+      description: {
+        type: String,
+        lowercase: true,
+        required: [true, 'description is required'],
+        trim: true
+      },
       composition: {
         type: String,
         lowercase: true,

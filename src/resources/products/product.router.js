@@ -9,8 +9,12 @@ const router = Router();
 router
   .route('/')
   .get(controllers.getAllMany)
-  //.get(controllers.getOne)
   .post(controllers.createOne)
+
+
+router
+  .route('/user')
+  .get(controllers.getAllManyByUserId)
 
 
 // /api/list/:id
