@@ -18,6 +18,7 @@ import { signup, signin, protect } from './utils/auth'
 import tryCatch from './helpers/tryCatch';
 import productController from './resources/products/product.controller';
 import categoryController from './resources/categories/category.controller'
+import supplierController from './resources/suppliers/supplier.controller';
 
 export const app = express();
 
@@ -47,6 +48,8 @@ app.post('/api/v1/auth/signup', tryCatch(signup));
 app.post('/api/v1/auth/login', tryCatch(signin));
 app.get('/api/v1/products/all',  productController.getAllMany)
 app.get('/api/v1/categories',  categoryController.getManyWithoutId)
+app.get('/api/v1/suppliers/all',  supplierController.getManyWithoutId)
+
 // search
 app.use('/api', protect);
 app.use('/api/v1', router);
